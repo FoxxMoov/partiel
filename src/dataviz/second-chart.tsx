@@ -4,18 +4,18 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
   Legend,
+  BarElement,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
@@ -24,27 +24,41 @@ ChartJS.register(
 export const options = {
   responsive: true,
   plugins: {
-    legend: {
-      position: 'top' as const,
-    },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: "Total des dons sur une année depuis la création de l'association en 1997",
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May'];
+const labels = [];
+for (var i = 1997; i <= 2022; i++) {
+  labels.push(JSON.stringify(i));
+}
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Nombre d'enfants aidé",
-      data: [1000, 3000, 2000, 1400, 900],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      tension: 0.1,
+      data: labels.map(() => Math.floor(Math.random() * 200000) + 20000),
+      backgroundColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 205, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(201, 203, 207, 1)',
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)',
+      ],
     },
   ],
 };
@@ -52,7 +66,7 @@ export const data = {
 export const SecondChart = () => {
   return (
     <div className='chart'>
-      <Line options={options} data={data} />
+      <Bar options={options} data={data} />
     </div>
   );
 };

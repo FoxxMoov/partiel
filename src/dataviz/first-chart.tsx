@@ -29,22 +29,25 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: "Nombre d'enfants aidé  depuis la création de l'association en 1997",
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May'];
+const labels = [];
+for (var i = 1997; i <= 2022; i++) {
+  labels.push(JSON.stringify(i));
+}
 
 export const data = {
   labels,
   datasets: [
     {
       label: "Nombre d'enfants aidé",
-      data: [1000, 3000, 2000, 1400, 900],
+      data: labels.map(() => Math.floor(Math.random() * 12000) + 100),
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      tension: 0.1,
+      tension: 0.5,
     },
   ],
 };
